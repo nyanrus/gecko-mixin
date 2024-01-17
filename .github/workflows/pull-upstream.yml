@@ -27,15 +27,10 @@ jobs:
         git config --global user.name nyanrus-actions
         git config --global user.email 68762426+nyanrus@users.noreply.github.com
 
-    - uses: actions/checkout@v4
+    -
       name: Clone mozilla/gecko-dev 🧬
-      with:
-        repository: "mozilla/gecko-dev"
-
-    - name: Fetch nyanrus/gecko-dev 📥
       run: |
-        git remote add lfozta https://github.com/${{ github.repository_owner }}/gecko-dev
-        git fetch lfozta
+        git clone https://github.com/mozilla/gecko-dev
 
     - name: Push 🎁
       run: |
