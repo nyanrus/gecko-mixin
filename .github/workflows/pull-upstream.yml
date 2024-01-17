@@ -30,6 +30,7 @@ jobs:
     - name: Clone mozilla/gecko-dev 🧬
       run: |
         git clone https://github.com/mozilla/gecko-dev
+        git checkout -b upstream-esr115-${DATE_STR} origin/master
 
     - name: Fetch nyanrus/gecko-dev
       run: |
