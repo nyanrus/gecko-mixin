@@ -31,6 +31,11 @@ jobs:
       run: |
         git clone https://github.com/mozilla/gecko-dev
 
+    - name: Fetch nyanrus/gecko-dev
+      run: |
+        git remote add lfozta https://github.com/nyanrus/gecko-dev
+        git fetch lfozta
+
     - name: Push 🎁
       run: |
         git push lfozta upstream-release-${DATE_STR}
