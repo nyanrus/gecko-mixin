@@ -27,8 +27,7 @@ jobs:
         git config --global user.name nyanrus-actions
         git config --global user.email 68762426+nyanrus@users.noreply.github.com
 
-    -
-      name: Clone mozilla/gecko-dev 🧬
+    - name: Clone mozilla/gecko-dev 🧬
       run: |
         git clone https://github.com/mozilla/gecko-dev
 
