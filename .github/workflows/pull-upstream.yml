@@ -33,7 +33,7 @@ jobs:
 
     - name: Fetch nyanrus/gecko-dev
       run: |
-        git remote add lfozta https://github.com/nyanrus/gecko-dev
+        git remote add lfozta https://github.com/nyanrus/gecko-dev.git
         git fetch lfozta
 
     - name: Push 🎁
