@@ -1,0 +1,49 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+# Please write our copyright if you use this file.
+# © 2023 Floorp Projects & Contributors
+
+name: "(U) 🧰 Pull upstream"
+
+on: workflow_dispatch
+
+jobs:
+  pull-upstream:
+    name: Pull upstream
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup 🪛
+      run: |
+        export DATE_STR=`date +"%Y%m%d%I%M%S"`
+        echo "DATE_STR=$DATE_STR" >> $GITHUB_ENV
+
+    - name: Setup git 🪛
+      run: |
+        git config --global user.name nyanrus-actions
+        git config --global user.email 68762426+nyanrus@users.noreply.github.com
+
+    - uses: actions/checkout@v4
+      name: Clone gecko-dev 🧬
+      with:
+        repository: "mozilla/gecko-dev"
+
+    - name: Fetch Floorp 📥
+      run: |
+        cd gecko-dev
+        git remote add floorp https://github.com/${{ github.repository_owner }}/gecko-dev
+        git fetch floorp
+
+    - name: Push 🎁
+      run: |
+        cd gecko-dev
+        git push floorp upstream-release-${DATE_STR}
+
+    - name: Create Pull Request
+      run: |
+        cd gecko-dev
+        gh pr create --repo https://github.com/${{ github.repository_owner }}/gecko-dev --base master --head upstream-release-${DATE_STR} --title "Pull upstream" --body "Warning: Be sure to create a merge commit and merge it in."
+      env:
+        GH_TOKEN: ${{ github.token }}
