@@ -1,0 +1,11 @@
+{
+  "buildOptions": {
+    "incremental": true,
+  },
+  "typeAcquisition": {
+    "include": ["./@types/generated/firefox/index.d.ts"]
+  },
+  "compilerOptions": {
+    "module": "NodeNext"
+  }
+}

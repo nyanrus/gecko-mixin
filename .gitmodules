@@ -1,3 +1,6 @@
 [submodule "gecko-dev"]
 	path = gecko-dev
 	url = https://github.com/nyanrus/gecko-dev
+[submodule "third_party/xpidl2dts"]
+	path = third_party/xpidl2dts
+	url = https://github.com/nyanrus/XPIDL2DTS

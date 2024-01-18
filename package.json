@@ -1,0 +1,20 @@
+{
+  "name": "gecko-mixin",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen": "tsx scripts/gecko-snippets.ts"
+  },
+  "keywords": [],
+  "author": "nyanrus",
+  "license": "MPL2.0",
+  "private": "true",
+  "type": "module",
+  "devDependencies": {
+    "@biomejs/biome": "^1.5.2",
+    "@types/node": "^20.11.5",
+    "tsx": "^4.7.0",
+    "xpidl2dts": "file:third_party/xpidl2dts"
+  }
+}
