@@ -1,0 +1,3 @@
+[submodule "gecko-dev"]
+	path = gecko-dev
+	url = https://github.com/nyanrus/gecko-dev
