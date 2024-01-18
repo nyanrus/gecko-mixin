@@ -3,9 +3,8 @@
 ## Copyrights
 
 ### Floorp (https://github.com/Floorp-Projects/Floorp)  
-© 2023 Floorp Projects & Contributors  
-Some GitHub Workflows file.
-
+Motivation to make this repo.
+Some codes may be gathered from there.
 
 ## LICENSE
 
