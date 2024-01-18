@@ -41,11 +41,13 @@ jobs:
     - name: Push 🎁
       run: |
         cd gecko-dev
+        # https://stackoverflow.com/questions/64374179/how-to-push-to-another-repository-in-github-actions
+        git config --unset-all http.https://github.com/.extraheader
         git push lfozta upstream-release-${DATE_STR}
 
     - name: Create Pull Request
       run: |
         cd gecko-dev
-        gh pr create --repo https://github.com/${{ github.repository_owner }}/gecko-dev --base master --head upstream-release-${DATE_STR} --title "Pull upstream" --body "Warning: Be sure to create a merge commit and merge it in."
+        gh pr create --repo ${{ github.repository_owner }}/gecko-dev --base master --head upstream-release-${DATE_STR} --title "Pull upstream" --body "Warning: Be sure to create a merge commit and merge it in."
       env:
         GH_TOKEN: ${{ github.token }}
