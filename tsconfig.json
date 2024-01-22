@@ -3,9 +3,10 @@
     "incremental": true,
   },
   "typeAcquisition": {
-    "include": ["./@types/generated/firefox/index.d.ts"]
+    "include": ["./@types/index.d.ts"]
   },
   "compilerOptions": {
-    "module": "NodeNext"
+    "module": "NodeNext",
+    "target": "ESNext"
   }
 }

@@ -1,0 +1,11 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+mixin.jar:
+% content mixin %content/mixin/ contentaccessible=yes
+  content/mixin/browser.overlay.js (browser/browser.overlay.js)
+
+% skin mixin classic/1.0 %skin/mixin/
+  skin/mixin/global.css (skin/global.css)
+
+% overlay chrome://browser/content/browser.xhtml chrome://mixin/content/browser.overlay.xhtml

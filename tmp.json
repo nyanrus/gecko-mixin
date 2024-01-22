@@ -1,0 +1,1 @@
+[{"jar_name":"browser","chrome":{"type":"content","name":"mixin","base_path":"%content/mixin/"},"list":[{"vpath":"content/mixin/browser.overlay.xhtml","rpath":"browser/browser.overlay.xhtml"}],"dir":"chrome"},{"jar_name":"","chrome":{"type":"skin","name":"mixin","base_path":"%skin/mixin/"},"list":[{"vpath":"skin/mixin/global.css","rpath":"skin/global.css"}],"dir":"chrome"}]

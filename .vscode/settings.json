@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "mozconfig": "shellscript",
+    "moz.build": "python",
+    "moz.configure": "python",
+    "*.xhtml": "xml"
+  }
+}

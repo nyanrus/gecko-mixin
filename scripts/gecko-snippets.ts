@@ -1,8 +1,6 @@
 import { processAll4Test } from "xpidl2dts";
 
-import { fileURLToPath } from "url";
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
-process.chdir(__dirname);
+process.chdir(import.meta.dirname);
 
 processAll4Test(
 	"../gecko-dev",
