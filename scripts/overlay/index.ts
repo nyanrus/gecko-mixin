@@ -1,4 +1,7 @@
-import { DOMParser, HTMLScriptElement } from "linkedom";
+import { DOMParser } from "linkedom";
+
+import type { XMLDocument } from "../../node_modules/linkedom/types/esm/xml/document.js";
+import type { Element } from "../../node_modules/linkedom/types/esm/interface/element.js";
 import { ChromeType, getChromeRPath, getObjDirs } from "../misc/objdir.js";
 import { parseJarManifest } from "../misc/parser.js";
 
@@ -29,13 +32,6 @@ try {
 	fs.rm(`${dirs[0]}/tmp`, { recursive: true });
 } catch {}
 
-// console.log(
-// 	"result: " +
-// 		JSON.stringify(
-// 			,
-// 		),
-// );
-
 const path_browserxhtml = await getChromeRPath(
 	db,
 	"chrome://browser/content/browser.xhtml",
@@ -46,34 +42,33 @@ const rpath_browser_xhtml = `${dirs[0]}/dist/bin/${path_browserxhtml}`;
 const document = new DOMParser().parseFromString(
 	(await fs.readFile(rpath_browser_xhtml)).toString(),
 	"text/xml",
-);
+) as MixinXMLDocument;
 
+Object.defineProperty(document, "createElementMixin", {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	value: (localName: any) => {
+		const elem = document.createElement(localName);
+		elem.dataset.geckomixin = "";
+		return elem;
+	},
+});
 for (const elem of document.querySelectorAll("[data-geckomixin]")) {
 	elem.remove();
 }
 
-const script = document.createElement("script");
-script.innerHTML = `Services.scriptloader.loadSubScript("chrome://mixin/content/browser.overlay.js")`;
-script.dataset.geckomixin = "";
+type MixinXMLDocument = XMLDocument & {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	createElementMixin: (localName: any) => Element;
+};
 
-document.querySelector("head").appendChild(script);
+function transformBrowserXHTML(document: MixinXMLDocument) {
+	const script = document.createElementMixin("script");
+	console.log(script);
+	//script.dataset.geckomixin = "";
+	script.innerHTML = `Services.scriptloader.loadSubScript("chrome://mixin/content/browser.overlay.js")`;
+	document.querySelector("head").appendChild(script);
+}
 
-// const div = document.createElement("html:div");
-// div.textContent = "I'm fine";
-// div.dataset.geckomixin = "";
+transformBrowserXHTML(document);
 
-// //https://stackoverflow.com/a/23047888/22665207
-// document
-// 	.querySelector("html\\:body")
-// 	.insertBefore(div, document.querySelector("#a11y-announcement"));
-
-// const title = document.createElement("title");
-// title.dataset.geckomixin = "";
-// title.textContent = "HALLO";
-
-// document.querySelector("head").appendChild(title);
-
-//console.log(document.querySelector("head").querySelector("[data-geckomixin]"));
-
-//console.log(dom.serialize());
 fs.writeFile(rpath_browser_xhtml, document.toString());
